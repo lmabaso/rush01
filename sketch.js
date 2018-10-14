@@ -11,6 +11,10 @@ var move = 10;
 var ship = {},
 ship_img = new Image();
 ship_img1 = new Image();
+ship_img2 = new Image();
+ship_img3 = new Image();
+ship_img3.src = 'imgs/greenship1/09.png';
+ship_img2.src = 'imgs/greenship4/09.png';
 ship_img1.src = 'imgs/F5S4/03.png';
 ship_img.src = 'imgs/F5S1/03.png';
 
@@ -58,7 +62,7 @@ class Ship {
       this.hp = 0;
       this.shield = 0;
     }
-    if (this.x < 0 || this.x > innerWidth - 1)
+    if (this.y < 0 || this.y > innerWidth - 1)
     {
       this.hp = 0;
       this.shield = 0;
@@ -132,6 +136,8 @@ class Ship {
 
 ship1 = new Ship(ship_img, 0, 0);
 ship2 = new Ship(ship_img1, 0, 500);
+ship3 = new Ship(ship_img2, 1320, 0);
+ship4 = new Ship(ship_img3, 1230, 500);
 
 function moveShip() {
   ship1.adv();
@@ -143,10 +149,12 @@ function turnShip(val) {
 
 function animate(){
   requestAnimationFrame(animate);
-  ctx.clearRect(0, 0, 1200, 800);
+  ctx.clearRect(0, 0, 1500, 1000);
   drawGrid();
   ship1.show();
   ship2.show();
+  ship3.show();
+  ship4.show();
   // ship.draw();
 }
 animate();
