@@ -21,6 +21,10 @@ time, mark, audio, video {
     background:transparent;
 }
 
+.hidden {
+  display: none;
+}
+
 body {
     line-height:1;
 }
@@ -352,11 +356,38 @@ div.cat-wrapper form select{
     padding: 5px;
     width: 90px;
 }
-div.gameSreen {
-  border: 1px solid black;
-  width: 900px;
-  height: 600px;
+div.gameScreen {
+  display: block;
+  background-image: url("missions.jpg");
+  margin: auto;
+  /* align-items: center; */
+  width: fit-content;
 }
+
+div.gridM {
+  border: 1px solid black;
+  width: 10px;
+  height: 10px;
+}
+
+div.gridrow {
+  display: flex;
+}
+
+div.gridcol {
+  border-top: 1px solid gray;
+  border-left: 1px solid white;
+  /* flex: 33.33%; */
+  padding: 3.5px;
+}
+
+#_0_110 {
+  background-color: red;
+}
+
+/* #myCanvas {
+  background-color: black; */
+/* } */
 /* color-palette: #8E9AAF #42CAFD #1F363D #40798C #E7E7E7 */
 
 /* TO DO */

@@ -16,6 +16,9 @@ echo '<!DOCTYPE html>
 				</ul>
 				<ul>
 					<li><a href="game.php">Game </a></li>
+				</ul>
+				<ul>
+					<li><a href="game2.php">Game2 </a></li>
 				</ul>';
 if (isset($_SESSION['u_name']))
 {
