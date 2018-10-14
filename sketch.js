@@ -10,6 +10,8 @@ var move = 10;
 
 var ship = {},
 ship_img = new Image();
+ship_img1 = new Image();
+ship_img1.src = 'imgs/F5S4/03.png';
 ship_img.src = 'imgs/F5S1/03.png';
 
 function drawGrid(){
@@ -29,10 +31,10 @@ function drawGrid(){
 }
 
 class Ship {
-  constructor(name) {
+  constructor(name, x, y) {
     this.ship = name;
-    this.x = 0;
-    this.y = 0;
+    this.x = x;
+    this.y = y;
     this.direction = "03";
     this.hp = 100;
     this.shield = 100;
@@ -40,79 +42,96 @@ class Ship {
 
   adv()
   {
-    if (this.direction === "03")
-      this.x = this.x + (move * 3);
-    else if (this.direction === "06")
-      this.y = this.y + (move * 3);
-    else if (this.direction == "09")
-      this.x = this.x - (move * 3);
-    else if (this.direction == "12")
-      this.y = this.y - (move * 3);
-    // ctx.drawImage(this.ship, this.x, this.y);
+    if (this.hp > 0)
+    {
+      if (this.direction === "03")
+        this.x = this.x + (move * 3);
+      else if (this.direction === "06")
+        this.y = this.y + (move * 3);
+      else if (this.direction == "09")
+        this.x = this.x - (move * 3);
+      else if (this.direction == "12")
+        this.y = this.y - (move * 3);
+    }
+    if (this.x < 0 || this.x > innerWidth - 1)
+    {
+      this.hp = 0;
+      this.shield = 0;
+    }
+    if (this.x < 0 || this.x > innerWidth - 1)
+    {
+      this.hp = 0;
+      this.shield = 0;
+    }
   }
 
   turn(dir)
   {
-    if (this.direction === "03")
+    if (this.hp > 0)
     {
-      if (dir === "left")
+      if (this.direction === "03")
       {
-        this.ship.src = "imgs/F5S1/12.png";
-        this.direction = "12";
+        if (dir === "left")
+        {
+          this.ship.src = "imgs/F5S1/12.png";
+          this.direction = "12";
+        }
+        else if (dir === "right")
+        {
+          this.ship.src = "imgs/F5S1/06.png";
+          this.direction = "06";
+        }
       }
-      else if (dir === "right")
+      else if (this.direction === "06")
       {
-        this.ship.src = "imgs/F5S1/06.png";
-        this.direction = "06";
+        if (dir === "left")
+        {
+          this.ship.src = "imgs/F5S1/03.png";
+          this.direction = "03";
+        }
+        else if (dir === "right")
+        {
+          this.ship.src = "imgs/F5S1/09.png";
+          this.direction = "09";
+        }
       }
-    }
-    else if (this.direction === "06")
-    {
-      if (dir === "left")
+      else if (this.direction === "09")
       {
-        this.ship.src = "imgs/F5S1/03.png";
-        this.direction = "03";
+        if (dir === "left")
+        {
+          this.ship.src = "imgs/F5S1/06.png";
+          this.direction = "06";
+        }
+        else if (dir === "right")
+        {
+          this.ship.src = "imgs/F5S1/12.png";
+          this.direction = "12";
+        }
       }
-      else if (dir === "right")
+      else if (this.direction === "12")
       {
-        this.ship.src = "imgs/F5S1/09.png";
-        this.direction = "09";
-      }
-    }
-    else if (this.direction === "09")
-    {
-      if (dir === "left")
-      {
-        this.ship.src = "imgs/F5S1/06.png";
-        this.direction = "06";
-      }
-      else if (dir === "right")
-      {
-        this.ship.src = "imgs/F5S1/12.png";
-        this.direction = "12";
-      }
-    }
-    else if (this.direction === "12")
-    {
-      if (dir === "left")
-      {
-        this.ship.src = "imgs/F5S1/09.png";
-        this.direction = "09";
-      }
-      else if (dir === "right")
-      {
-        this.ship.src = "imgs/F5S1/03.png";
-        this.direction = "03";
+        if (dir === "left")
+        {
+          this.ship.src = "imgs/F5S1/09.png";
+          this.direction = "09";
+        }
+        else if (dir === "right")
+        {
+          this.ship.src = "imgs/F5S1/03.png";
+          this.direction = "03";
+        }
       }
     }
   }
 
   show(){
-    ctx.drawImage(this.ship, this.x, this.y);
+    if (this.hp > 0)
+      ctx.drawImage(this.ship, this.x, this.y);
   }
 }
 
-ship1 = new Ship(ship_img);
+ship1 = new Ship(ship_img, 0, 0);
+ship2 = new Ship(ship_img1, 0, 500);
 
 function moveShip() {
   ship1.adv();
@@ -127,6 +146,7 @@ function animate(){
   ctx.clearRect(0, 0, 1200, 800);
   drawGrid();
   ship1.show();
+  ship2.show();
   // ship.draw();
 }
 animate();
